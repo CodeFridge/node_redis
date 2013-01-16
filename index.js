@@ -516,13 +516,9 @@ RedisClient.prototype.return_error = function (err) {
 // if a callback throws an exception, re-throw it on a new stack so the parser can keep going.
 // put this try/catch in its own function because V8 doesn't optimize this well yet.
 function try_callback(callback, reply) {
-    try {
-        callback(null, reply);
-    } catch (err) {
-        process.nextTick(function () {
-            throw err;
-        });
-    }
+    
+    callback(null, reply);
+     
 }
 
 // hgetall converts its replies to an Object.  If the reply is empty, null is returned.
